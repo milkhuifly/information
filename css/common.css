@@ -1,0 +1,15 @@
+html{
+  		font:normal normal 20px "Microsoft soft","sans.serif";
+  		color:#333;
+  	}
+  	body,ul,ol,dl,h1,h2,h3{
+  		margin:0;
+  		padding:0;
+  	}
+  	ul,ol{
+  		list-style: none;
+  	}
+  	a{
+  		color:#333;
+  		text-decoration: none;
+  	}

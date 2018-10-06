@@ -1,0 +1,748 @@
+<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/iconFont/iconfont.css">
+    <link rel="stylesheet" href="./css/home.css">
+
+<div id="home">
+ <div class="outerDiv">
+  <div class="row">
+    <div class="col-sm-3 shange">
+      <!-- 左边纵向第一个div -->
+          <div class="leftDiv bg-white">
+            <div class="iconDiv bg-green">
+                <i class="iconfont icon-yun"></i>
+            </div>
+            <div class="numDiv">
+                <span>99.9%</span>
+                <small>SERVER UPTIME</small>
+            </div> 
+          </div>
+      <!-- 左边纵向第二个div -->
+          <div class="leftDiv bg-white">
+            <div class="iconDiv bg-blue">
+                <i class="iconfont icon-user"></i>
+            </div>
+            <div class="numDiv">
+                <span>11.7K</span>
+                <small>USERS TOTAL</small>
+            </div> 
+          </div>
+      <!-- 左边纵向第三个div -->
+          <div class="leftDiv bg-white">
+            <div class="iconDiv bg-green">
+                <i class="iconfont icon-user"></i>
+            </div>
+            <div class="numDiv">
+                <span>2,470</span>
+                <small>NEW DAILY PHOTOS</small>
+            </div> 
+          </div>
+    </div>
+    <!-- 中间折线图 -->
+    <div class="col-sm-6 shange">
+        <div class="middleDiv">
+            <div id="visContainer"></div>
+            <div class="numDiv">
+                <span>14.85%</span>
+                <small>More visitors</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3 shange">
+    <!-- 柱体 -->
+        <div class="rightDiv">
+                <div id="uptimeContainer"></div>
+                <div class="numDiv">
+                    <span>95.8%</span>
+                    <small>CURRENT SERVER UPTIME</small>
+                </div>
+            </div>
+            <!-- 扇形图 -->
+            <div class="salesDiv">
+                <div id="salesContainer"></div>
+                <div class="numDiv">
+                    <span>320,45</span>
+                    <small>AVG OF SALES</small>
+                </div>
+            </div>
+    </div>
+  </div>
+  <!-- 下面的两个div -->
+  <div class="row">
+      <div class="col-sm-6 bottom">
+          <div class="bleftDiv">
+              <div id="leftupContainer">
+                  
+              </div>
+              <div class="updownDiv">
+                  <div class="updownleftDiv" id="updownContainer">  
+                  </div>
+                  <div class="numDiv">
+                      <small>Pageviews</small>
+                  </div>
+                   </div>
+
+                  <div class="updownDiv">
+                       <div class="updownleftDiv" id="updown2Container">  
+                  </div>
+                  <div class="numDiv">
+                      <small>Visitors</small>
+                  </div>
+                  </div>
+                  <div class="updownDiv">
+                       <div class="updownleftDiv" id="updown3Container">  
+                  </div>
+                  <div class="numDiv">
+                      <small>Converted Sales</small>
+                  </div>
+                  </div>
+          </div>
+      </div>
+      <div class="col-sm-6 bottom">
+          <div class="brightDiv" id="brightContainer">
+              <div class="upDiv">
+              <div class="upone1Div" id="down1Container"></div>
+              <div class="upone2Div" id="down2Container"></div>
+              <div class="numDiv">
+              <span>15.05mb/s</span>
+              <small>DOWNLOAD SPEED</small>
+              </div>
+          </div>
+          <div class="downDiv">
+              <div class="uponeDiv" id="cpuContainer"></div>
+              <div class="numDiv">
+              <span>67.35%</span>
+              <small>CPU USAGE</small>
+              </div>
+          </div>
+          </div>
+  </div>
+ </div>
+</div>
+<style>
+.updownleftDiv{
+    height: 50px;
+    width: 300px;
+    margin-left: 100px;
+    /*margin-top: 30px;*/
+    text-align: center;
+    /*border:1px solid green;*/
+}
+.updownDiv>.numDiv>small{
+    font-size: 14px;
+}
+.updownDiv{
+    height: 50px;
+    /*border:1px solid #ccc;*/
+    margin-top: 10px;
+}
+.upDiv,.downDiv,.updownDiv{
+    position: relative;
+}
+.updownDiv .numDiv{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.upDiv .numDiv,.downDiv .numDiv{
+    position: absolute;
+    top:12px;
+    left: 14px;
+}
+.upone1Div{
+    height: 180px;
+    /*border:1px solid red;*/
+
+}
+.upone2Div{
+    height: 60px;
+    /*border:1px solid red;*/
+
+}
+.uponeDiv{
+    height: 240px;
+    /*border:1px solid red;*/
+    margin-top: 20px;
+}
+#leftupContainer{
+    height: 250px;
+    /*border:1px solid #ccc;*/
+}
+ .upDiv{
+    height: 250px;
+    margin-bottom: 20px;
+    /*border:1px solid #ccc;*/
+}
+.downDiv{
+    /*border:1px solid #ccc;*/
+    height: 210px;
+}
+.bottom{
+    height: 530px;
+    border:1px solid #ccc;
+    padding: 20px;
+}
+.shange{
+    border:1px solid #ccc;
+}
+.bg-blue{
+    background-color: #7c30bf;
+}
+.bg-white{
+    background-color: white;
+}
+.bg-green{
+    background-color:#66bb0d;
+}
+.outerDiv{
+    width: 95%;
+    margin:0 auto;
+}
+.leftDiv{
+    overflow:hidden;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top:10px;
+}
+.leftDiv .iconDiv,.leftDiv .numDiv{
+    float:left; 
+}
+.iconDiv{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+}
+.iconDiv i{
+    line-height: 50px;
+    color:white;
+    font-size: 30px;
+}
+.leftDiv .numDiv{
+    margin-left: 20px;
+    padding-top:5px;
+}
+.numDiv span{
+    font-size: 24px;
+    line-height: 24px;
+}
+.numDiv small{
+    display: block;
+    color: #ccc;
+    font-size: 10px;
+}
+#visContainer{
+    height: 230px;
+    margin-top: 10px;
+}
+.middleDiv,.rightDiv,.salesDiv{
+    position: relative;
+}
+.middleDiv .numDiv,.rightDiv .numDiv,.salesDiv .numDiv{
+    position: absolute;
+    top:16px;
+    left: 18px;
+}
+.rightDiv span,.upDiv span{
+    color: #8746b6;
+}
+.middleDiv span,.salesDiv span,.downDiv span{
+    color:#66bb0d;
+    /*color:#862eb7;*/
+}
+.rightDiv,.salesDiv{
+    margin-top: 10px;
+}
+#uptimeContainer,#salesContainer{
+    height: 110px;
+}
+</style>
+<script>
+    drawVis();
+    function drawVis(){
+        // 绘制
+        var chart = Highcharts.chart('visContainer', {
+            chart:{
+                margin:[0,0,0,0],
+            },
+            credits:{
+                enabled:false,
+            },
+            colors:['#66bb0d','#cccccc'],
+            title: {
+                text: ''
+            },
+            xAxis: {
+                visible:false,
+            },
+            yAxis: {
+                visible:false,
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                floating:true,
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top'
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    pointStart: 2010
+                }
+            },
+            series: [{
+                name: 'Page',
+                data: [43934, 52503, 62177, 43658, 32031, 34931, 77133, 84175,104916, 84064, 89742, 129851, 112490, 100282, 92121, 92111,91232,90322,91222,151023,118711,93211,93211,90000,91000,98210,91201,92100,80012,81000,71029,81920,81110,91011,71001,62232,62120,71234]
+            }, {
+                name: 'Visitors',
+                data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434,43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+            }]
+        });
+    }
+    drawUptime();
+    function drawUptime(){
+        var chart = Highcharts.chart('uptimeContainer', {
+            chart:{
+                margin:[0,0,0,0],
+            },
+            credits:{
+                enabled:false,
+            },
+            colors:['#862eb7'],
+            title: {
+                text: ''
+            },
+            xAxis: {
+                visible:false,
+            },
+            yAxis: {
+                visible:false,
+            },
+            series: [{
+                type: 'column',
+                colorByPoint: true,
+                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4,148.5, 216.4, 194.1, 95.6, 54.4],
+                showInLegend: false
+            }]
+        });
+    }
+
+    drawSales();
+     function drawSales(){
+        var chart = Highcharts.chart('salesContainer', {
+            credits:{
+                enabled:false,
+            },
+            colors:['#006633','#009900','#009933','#339933','#006600','#003300','#009966'],
+            chart: {
+                margin : [0, 0 , 0, 100]
+            },
+            title: {
+                floating:true,
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                    },
+                }
+            },
+            series: [{
+                type: 'pie',
+                innerSize: '60%',
+                name: 'Sales',
+                data: [
+                    ['Firefox',45.0],
+                    ['IE',26.8],
+                    ['Chrome',12.8],
+                    ['Safari',8.5],
+                    ['Opera',6.2],
+                    ['其他',0.7]
+                ]
+            }]
+        });
+    }
+
+    uprightdraws();
+    function uprightdraws(){
+      var chart = Highcharts.chart('leftupContainer', {
+        chart: {
+            spacing : [40, 0 , 40, 0]
+        },
+        credits:{
+                enabled:false,
+            },
+        title: {
+            floating:true,
+            text: ''
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
+                point: {
+                    events: {
+                        mouseOver: function(e) {  // 鼠标滑过时动态更新标题
+                            // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+                            chart.setTitle({
+                                text: e.target.name+ '\t'+ e.target.y + ' %'
+                            });
+                        }
+                        //, 
+                        // click: function(e) { // 同样的可以在点击事件里处理
+                        //     chart.setTitle({
+                        //         text: e.point.name+ '\t'+ e.point.y + ' %'
+                        //     });
+                        // }
+                    }
+                },
+            }
+        },
+        series: [{
+            type: 'pie',
+            innerSize: '80%',
+            name: '市场份额',
+            data: [
+                {name:'Firefox',   y: 45.0, url : 'http://bbs.hcharts.cn'},
+                ['IE',       26.8],
+                {
+                    name: 'Chrome',
+                    y: 12.8,
+                    sliced: true,
+                    selected: true,
+                    url: 'http://www.hcharts.cn'
+                },
+                ['Safari',    8.5],
+                ['Opera',     6.2],
+                ['其他',   0.7]
+        ]
+    }]
+}, function(c) { // 图表初始化完毕后的会掉函数
+    // 环形图圆心
+    var centerY = c.series[0].center[1],
+        titleHeight = parseInt(c.title.styles.fontSize);
+    // 动态设置标题位置
+    c.setTitle({
+        y:centerY + titleHeight/2
+    });
+});
+    }
+     updown1();
+    function updown1(){
+      var chart = Highcharts.chart('updownContainer', {
+    chart: {
+        type: 'areaspline'
+    },
+    title: {
+        text: ''
+    },
+    credits:{
+                enabled:false,
+            },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        verticalAlign: 'top',
+        x: 150,
+        y: 100,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+    },
+    // xAxis: {
+    //     categories: [
+    //         '周一','周二','周三','周四','周五','周六'
+    //     ],
+    // },
+    // yAxis: {
+    //     title: {
+    //         text: '水果 单位'
+    //     }
+    // },
+    tooltip: {
+        shared: true,
+        valueSuffix: ' 单位'
+    },
+    plotOptions: {
+        areaspline: {
+            fillOpacity: 0.2
+        }
+    },
+    series: [{
+        name: '小张',
+        data: [3, 4, 3, 5, 4, 10, 12]
+    }, {
+        name: '小潘',
+        data: [1, 3, 4, 3, 3, 5, 4]
+    }]
+});
+    }
+     updown2();
+    function updown2(){
+      var chart = Highcharts.chart('updown2Container', {
+    chart: {
+        type: 'areaspline'
+    },
+    title: {
+        text: ''
+    },
+    credits:{
+                enabled:false,
+            },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        verticalAlign: 'top',
+        x: 150,
+        y: 100,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+    },
+    // xAxis: {
+    //     categories: [
+    //         '周一','周二','周三','周四','周五','周六'
+    //     ],
+    // },
+    // yAxis: {
+    //     title: {
+    //         text: '水果 单位'
+    //     }
+    // },
+    tooltip: {
+        shared: true,
+        valueSuffix: ' 单位'
+    },
+    plotOptions: {
+        areaspline: {
+            fillOpacity: 0.2
+        }
+    },
+    series: [{
+        name: '小张',
+        data: [3, 4, 3, 5, 4, 10, 12]
+    }, {
+        name: '小潘',
+        data: [1, 3, 4, 3, 3, 5, 4]
+    }]
+});
+    }
+     updown3();
+    function updown3(){
+      var chart = Highcharts.chart('updown3Container', {
+    chart: {
+        type: 'areaspline'
+    },
+    title: {
+        text: ''
+    },
+    credits:{
+                enabled:false,
+            },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        verticalAlign: 'top',
+        x: 150,
+        y: 100,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+    },
+    // xAxis: {
+    //     categories: [
+    //         '周一','周二','周三','周四','周五','周六'
+    //     ],
+    // },
+    // yAxis: {
+    //     title: {
+    //         text: '水果 单位'
+    //     }
+    // },
+    tooltip: {
+        shared: true,
+        valueSuffix: ' 单位'
+    },
+    plotOptions: {
+        areaspline: {
+            fillOpacity: 0.2
+        }
+    },
+    series: [{
+        name: '小张',
+        data: [3, 4, 3, 5, 4, 10, 12]
+    }, {
+        name: '小潘',
+        data: [1, 3, 4, 3, 3, 5, 4]
+    }]
+});
+    }
+    rightdraws();
+    function rightdraws(){
+      Highcharts.chart('down1Container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: ''
+    },
+    credits:{
+                enabled:false,
+            },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Chrome',
+            y: 61.41,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Internet Explorer',
+            y: 11.84
+        }, {
+            name: 'Firefox',
+            y: 10.85
+        }, {
+            name: 'Edge',
+            y: 4.67
+        }, {
+            name: 'QQ',
+            y: 1.2
+        }]
+    }]
+});
+    }
+    right2();
+    function right2(){
+      var chart = Highcharts.chart('down2Container', {
+    chart: {
+        type: 'areaspline'
+    },
+    title: {
+        text: ''
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        verticalAlign: 'top',
+        x: 150,
+        y: 100,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+    },
+    // xAxis: {
+    //     categories: [
+    //         '周一','周二','周三','周四','周五','周六'
+    //     ],
+    // },
+    // yAxis: {
+    //     title: {
+    //         text: '水果 单位'
+    //     }
+    // },
+    tooltip: {
+        shared: true,
+        valueSuffix: ' 单位'
+    },
+    plotOptions: {
+        areaspline: {
+            fillOpacity: 0.2
+        }
+    },
+    series: [{
+        name: '小张',
+        data: [3, 4, 3, 5, 4, 10, 12]
+    }, {
+        name: '小潘',
+        data: [1, 3, 4, 3, 3, 5, 4]
+    }]
+});
+    }
+    cpudraws();
+    function cpudraws(){
+// 初始化图表
+var chart = Highcharts.chart('cpuContainer', {
+    title: {
+        text: ''
+    },
+    credits:{
+                enabled:false,
+            },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: '浏览器占比',
+        data: [
+            ['Firefox',   45.0],
+            // ['IE',       26.8],
+            {
+                name: 'Chrome',
+                y: 12.8,
+                sliced: true,
+                selected: true
+            },
+            ['Safari',    8.5],
+            ['Opera',     6.2],
+            ['其他',   0.7]
+        ]
+    }]
+});
+    }
+   
+</script>

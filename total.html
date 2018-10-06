@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>看点资讯主页面</title>
+	<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="./css/home.css"> -->
+	<script src=jquery-3.3.1/jquery-3.3.1.min.js></script>
+	<script src="js/highcharts.js"></script>
+	<script src="css/bootstrapSwitch/js/bootstrap-switch.min.js"></script>
+	<link rel="stylesheet" href="css/iconFont/iconfont.css">
+	<link rel="stylesheet" href="css/bootstrapSwitch/css/bootstrap3/bootstrap-switch.min.css">
+	<link rel="stylesheet" href="./css/yonghu.css">
+	<script src="js/config.js"></script>
+	<style>
+	ul{
+      /*margin:15px;*/
+      width: 100%;
+      margin-left: 0;
+      padding:0;
+	}
+	 ul>li{
+      list-style: none;
+      height: 30px;
+      /*text-align: center;*/
+      line-height: 30px;
+      border-bottom: .3px solid rgb(51,51,51);
+      position: relative;
+	}
+	ul>li>img:last-child{
+        position: absolute;
+        right:20px;
+        top: 10px;
+	}
+	ul>li>img:first-child{
+		position: absolute;
+		left: 20px;
+        top: 10px;
+	}
+	ul>li>span{
+		position: absolute;
+		left: 48px;
+	}
+	.left-nav{
+		width: 950px;
+		height: 38px;
+		background-color: #fff;
+		position: absolute;
+		right: 0;
+	}
+	.left-bottom{
+		width: 920px;
+		height: 600px;
+		background-color: #eeeeee;
+		padding-top: 40px;
+	}
+	.left-nav>i{
+		font-size: 24px;
+	}
+	.left-nav>i:first-child{
+		margin-right: 20px;
+		margin-left: 10px;
+		margin-top: 10px;
+	}
+	.fix{
+		position: absolute;
+		width: 15px;
+		height: 15px;
+		background-color: red;
+		border-radius: 50%;
+		font-size: 14px;
+		color: #fff;
+		text-align: center;
+		line-height: 15px;
+		top: 7px;
+		left:70px;
+	}
+	.milk{
+		position: absolute;
+		right:0;
+		top: 0;
+	}
+	</style>
+</head>
+<body>
+	<!-- #3d556d -->
+	<!-- <a href="http://120.78.164.247/cms/?tdsourcetag=s_pctim_aiomsg#g=1&p=%E9%A6%96%E9%A1%B5">跳转到看点资讯</a> -->
+<div class="container">
+	<div class="col-md-2 left">
+	   <div class="nav">
+	   	  <img src="images/kandian.png" alt="">
+	   	  <span>看点资讯</span>
+	   </div>
+	   <br>
+	   <br>
+	   <ul class="leftUl">
+	   	<li class="firstLi">
+	   	 <img src="images/shouye.png" alt="">
+	   	 <span class="wenzi">首页</span>
+	   	 <img src="images/jiantou.png" alt="">
+	   	</li>
+	   	<li class="secondLi">
+	   	<img src="images/lanmu.png" alt="">
+        <span class="wenzi">栏目管理</span>
+	   	 <img src="images/jiantou.png" alt="">
+	   	</li>
+	   	<li class="thirdLi">
+	   	<img src="images/zixun.png" alt="">
+         <span class="wenzi">资讯管理</span>
+	   	 <img src="images/jiantou.png" alt="">
+	   	</li>
+	   	<li class="fourLi">
+	   	<img src="images/yonghu.png" alt="">
+	   	<span class="wenzi">用户管理</span>
+	   	 <img src="images/jiantou.png" alt="">
+	   	</li>
+	   </ul>
+    </div>
+    <div class="col-md-10 right">
+	   <div class="left-nav">
+	   	 <i class="iconfont icon-liebiao1"></i>
+		 <i class="iconfont icon-laba"></i>
+		 <span class="fix">4</span>
+		 <div class="milk">
+		 <img src="./images/nv.png" alt="" style="width:40px;height:40px;border:1px solid red; z-index:99; border-radius: 50%;">
+		 <span>milk</span>
+		<!-- <i>乔峰</i> -->
+		 <i class="iconfont icon-kuozhan"></i>
+			</div>
+	   </div>
+	   <div class="left-bottom"> 
+	   </div>
+    </div>
+</div>
+</body>
+<script>
+// console.log(baseURL);
+   var img=document.images;
+   img[0].style="margin-right:10px";
+   // $('img[0]').offset(top:'0',left:'120px');
+   // 用css添加样式
+	$(function(){
+     $('.left').css({
+     	background:'#282830',
+     	height:'637px',
+     	padding:'0',
+     	position:'relative'
+     });
+     $('.right').css({
+     	background:'#f0f0f0',
+     	height:'637px'
+     });
+     $('.nav').css({
+     	background:'#3d556d',
+     	height:'38px',
+     	width:'100%',
+     	fontSize:'14px',
+     	textAlign:'center',
+     	color:'#fff',
+     	cursor:'pointer',
+     	lineHeight:'38px',
+     });
+     $('.wenzi').css({
+     	fontSize:'14px',
+     	color:'#fff',
+     });
+	});
+   $('.left-bottom').load('home.html');
+   $('.firstLi').click(function(){
+       $('.left-bottom').load('home.html');
+   });
+    $('.secondLi').click(function(){
+       $('.left-bottom').load('category.html');
+   });
+     $('.thirdLi').click(function(){
+       $('.left-bottom').load('info.html');
+   });
+      $('.fourLi').click(function(){
+       $('.left-bottom').load('user.html');
+   });
+</script>
+</html>

@@ -1,0 +1,83 @@
+.upDiv{
+    height: 250px;
+}
+.bottom{
+    height: 400px;
+    border:1px solid #ccc;
+}
+.shange{
+    border:1px solid #ccc;
+}
+.bg-blue{
+    background-color: #7c30bf;
+}
+.bg-white{
+    background-color: white;
+}
+.bg-green{
+    background-color:#66bb0d;
+}
+.outerDiv{
+    width: 95%;
+    margin:0 auto;
+}
+.leftDiv{
+    overflow:hidden;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top:10px;
+}
+.leftDiv .iconDiv,.leftDiv .numDiv{
+    float:left; 
+}
+.iconDiv{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+}
+.iconDiv i{
+    line-height: 50px;
+    color:white;
+    font-size: 30px;
+}
+.leftDiv .numDiv{
+    margin-left: 20px;
+    padding-top:5px;
+}
+.numDiv span{
+    font-size: 24px;
+    line-height: 24px;
+}
+.numDiv small{
+    display: block;
+    color: #ccc;
+    font-size: 10px;
+}
+
+
+#visContainer{
+    height: 230px;
+    margin-top: 10px;
+}
+.middleDiv,.rightDiv,.salesDiv{
+    position: relative;
+}
+.middleDiv .numDiv,.rightDiv .numDiv,.salesDiv .numDiv{
+    position: absolute;
+    top:20px;
+    left: 20px;
+}
+.rightDiv span,.upDiv span{
+    color: #8746b6;
+}
+.middleDiv span,.salesDiv span,.downDiv span{
+    color:#66bb0d;
+    /*color:#862eb7;*/
+}
+.rightDiv,.salesDiv{
+    margin-top: 10px;
+}
+#uptimeContainer,#salesContainer{
+    height: 110px;
+}

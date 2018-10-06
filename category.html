@@ -1,0 +1,266 @@
+<div id="category">
+	<button class="btn btn-success btn-sm addBtn">新 增</button>
+	<button class="btn btn-success btn-sm batchDelBtn">批量删除</button>
+	<table class="table table-bordered text-center">
+		<tr>
+			<td>编号</td>
+			<td>名称</td>
+			<td>父栏目</td>
+			<td>描述</td>
+			<td>操作</td>
+		</tr>
+	</table>
+	<!-- 模态框 -->
+	<div class="modal" id="categoryModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<div class="backDiv">
+						<i class="iconfont icon-zuo"></i>
+						<span>返回</span>
+					</div>
+					<div class="modal-title">
+						添加栏目
+					</div>
+				</div>
+				<div class="modal-body">
+					<form  class="form">
+						<div class="form-group">
+							<label for="">栏目名称</label>
+							<input type="text" name="categoryName" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="">父栏目</label>
+							<select name="categoryParent" class="form-control">
+								<option value="">请选择</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="">描述</label>
+							<textarea name="categoryComment" cols="30" rows="5" class="form-control"></textarea>
+						</div>
+						<div class="form-group hide">
+							<button type="reset">重置</button>
+						</div>	
+					</form>
+				</div>
+				<div class="modal-footer">
+					<span class="messageSpan"></span>
+					<button class="btn btn-success btn-sm saveBtn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(function(){
+		// 所有的栏目
+		var categories = [];
+		var option = "新增";
+		// 当前正在修改的对象的id
+		var currentId = '';
+		/*
+				点击新增的提交的时候，不传id
+				点击修改的提交的时候，传id
+
+				在点击提交按钮的时候，判断是新增还是修改，从而决定是否携带id给后台
+				
+				后台中关于新增和修改的区别在与有没有传id,传id就是修改，不传id就是新增。
+		 */ 
+
+		// 设置modal-content的高度，为视口区的高度
+		$('.modal-content').height($(window).height());
+		// 新增
+		$('.addBtn').click(function(){
+			option = "新增";
+			// 清空表单，清空提示信息，清空select里面的内容(除了第一行)，从后台获取所有的栏目，追加option，显示模态框
+			$('button[type=reset]').trigger('click');
+			$('.messageSpan').html('');
+			addOption();
+		});
+		// 返回
+		$('.backDiv').click(function(){
+			$('#categoryModal').hide();
+		});
+		//点击“提交”按钮之后，将写入的数据保存到后台，
+		$('.saveBtn').click(function(){
+			// 获取数据，表单验证，不通过提示用户，如果通过封装对象，传递给后台，保存成功，提示用户，刷新数据，关闭模态框
+
+			//获取到写入的值
+			var categoryName = $('input[name=categoryName]').val();
+			var categoryParent = $('select[name=categoryParent]').val();
+			var categoryComment = $('textarea[name=categoryComment]').val();
+			if(categoryName&&categoryComment){
+				// 将写入的数据封装到对象里 保存 下面的四个属性是后台需要的
+				var obj = {
+					name:categoryName,
+					comment:categoryComment,
+					no:'',
+					parentId:categoryParent,
+				};
+				if(option=="修改"){
+					obj.id = currentId;
+				}
+				//往后台写数据
+				$.post(baseURL+'/manager/category/saveOrUpdateCategory',obj,function(res){
+					console.log(res,'保存或更新成功');
+					alert('保存或更新成功');
+					//执行以下获取数据，把刚刚写入到后台的数据拿到 显示到咱们的面前
+					loadData();
+					//最后让模态框隐藏
+					$('#categoryModal').hide();
+				});
+			}else{
+				$('.messageSpan').html('请输入完整的信息');
+			}
+		});
+		// 修改
+		$('#category table').on({
+			click:function(){
+				option = "修改";
+				// 获取当前要修改的id，获取对应对象，给模态框中设置值【select比较麻烦，获取所有栏目追加option,设置值】，模态框显示。
+				// 清空提示信息
+				$('.messageSpan').html('');
+				// this是要修改的i 通过id修改
+				//通过要点击的那个修改的i找到要修改的那一行value的值,就是咱们要找的id
+				//通过当前的this找到一行 再找到子节点
+				var id = $(this).closest('tr').find('input[type=checkbox]').val();
+				//把id赋给全局的currentId
+				currentId = id;
+				//在所有的栏目对象中过滤出来id等于自己选中的id的
+				//filter返回一个数组 所以最后[0]拿一下对象
+				// 这一步是从所有的id中找到和自己选中的id一样的
+				var cat = categories.filter(function(item){
+					//这个item是所有栏目的对象
+					return item.id == id;
+				})[0];
+				// 找到要修改的id后就设置值  值是筛选出来的name
+				$('input[name=categoryName]').val(cat.name);
+				$('textarea[name=categoryComment]').val(cat.comment);
+                //不能直接在这个下面设置值 因为有时候节点还没追加完 所以这时还不能追加
+				// addOption();
+				//下面的function是在追加option完了之后才设置的
+				//这个function里面写啥 下面的handle()就执行啥
+				addOption(function(){
+					$('select[name=categoryParent]').val(cat.parent?cat.parent.id:'');
+				});
+				// 
+			}
+		},'i[title=修改]');
+		// 删除
+		$('#category table').on({
+			click:function(){
+				// 获取id,传递给后台
+				var id = $(this).closest('tr').find('input[type=checkbox]').val();
+				var obj = {
+					id:id
+				};
+				$.get(baseURL+'/manager/category/deleteCategoryById',obj,function(res){
+					if(res.status==200){
+						alert('删除成功');
+						loadData();
+					}else{
+						alert('删除失败');
+						console.log(res.message);
+					}
+				})
+			}
+		},'i[title=删除]');
+
+		// 批量删除
+		$('.batchDelBtn').click(function(){
+			// 获取用户选择的checkbox,获取对应的id数组,转换成字符串传递给后台
+			var ids = $('#category input[type=checkbox]:checked').map(function(index,item){
+				return $(item).val();
+			}).get();
+			// ids:'1,2,3,4'
+			var obj = {
+				ids:ids.toString()
+			};
+			$.post(baseURL+'/manager/category/batchDeleteCategory',obj,function(res){
+				if(res.status==200){
+					alert("批量删除成功");
+					loadData();
+				}else{
+					alert("批量删除失败");
+					console.log(res.message);
+				}
+			});
+
+		});
+		loadData();
+
+		// 追加option,显示模态框
+		function addOption(handle){
+			$('#category select option:not(:first)').remove();
+			$.get(baseURL+'/manager/category/findAllCategory',function(res){
+				res.data.forEach(function(item){
+					var $option = $('<option value="'+item.id+'">'+item.name+'</option>');
+					$('#category select').append($option);
+				});
+				//本来应该在这儿设置修改的值的，但是新增的时候也用到了这段代码，调用addoption时候如果没有参数就是新增 如果有参数就是修改，就执行下面if语句
+				if(handle){
+					handle();
+				}
+				$('#categoryModal').show();
+			});
+		}
+		// 获取数据
+		function loadData(){
+			// 先删除节点，获取数据，追加节点
+			$('#category table tr:not(:first)').remove();
+			$.get(baseURL+'/manager/category/findAllCategory',function(res){
+				categories = res.data;
+				res.data.forEach(function(item){
+					var $tr = $(`<tr>
+						<td><input type="checkbox" value="`+item.id+`"></td>
+						<td>`+item.name+`</td>
+						<td>`+(item.parent?item.parent.name:'-')+`</td>
+						<td>`+item.comment+`</td>
+						<td>
+							<i class="iconfont icon-edit-1-copy" title="修改"></i>
+							<i class="iconfont icon-shanchu" title="删除"></i>
+						</td>
+					</tr>`);
+					$('#category table').append($tr);
+				});
+			});
+		}
+	});
+</script>
+<style>
+	#category{
+		background-color: white;
+		padding: 10px;
+	}
+	#category table{
+		margin-top:10px;
+	}
+	#category table i{
+		color:#66bb0d;
+		cursor: pointer;
+	}
+	#category table i:nth-child(2){
+		color:red;
+		margin-left:10px;
+	}
+	.modal{
+		background-color: rgba(0,0,0,0.4);
+	}
+	.modal-dialog{
+		width: 300px;
+		margin-top:0;
+		margin-right: 0;
+	}
+	.backDiv{
+		float: left;
+	}
+	.messageSpan{
+		color: red;
+	}
+</style>
+
+
+
+
+
